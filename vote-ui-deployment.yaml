@@ -14,7 +14,7 @@ spec:
         app: vote-ui
     spec:
       containers:
-      - image: docker.io/killebrew4dev/vote:latest
+      - image: docker.io/killebrew4dev/vote
         name: vote-ui
         ports:
         - containerPort: 80

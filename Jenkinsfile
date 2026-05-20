@@ -21,10 +21,4 @@ node {
       }
     }
   }
-
-  stage('Trigger deployment') {
-    def dockerTag = params.DOCKERTAG ?: env.DOCKERTAG ?: DOCKERTAG
-    echo "Triggering deployment with DOCKERTAG: ${dockerTag}"
-    build job: 'deployment', parameters: [string(name: 'DOCKERTAG', value: "${dockerTag}")]
-  }
 }

@@ -23,15 +23,8 @@ node {
   }
 
   stage('Trigger deployment') {
-    agent any
-    environment{
-      def GIT_COMMIT = "${env.GIT_COMMIT}"
-    }
-    steps{
-      echo "${GIT_COMMIT}"
-      echo "triggering deployment"
-      // passing variables to job deployment run by vote-app-deploy repository Jenkinsfile
-      build job: 'deployment', parameters: [string(name: 'DOCKERTAG', value: GIT_COMMIT)]
-    }    
- }
+    def dockerTag = params.DOCKERTAG ?: env.DOCKERTAG ?: DOCKERTAG
+    echo "Triggering deployment with DOCKERTAG: ${dockerTag}"
+    build job: 'deployment', parameters: [string(name: 'DOCKERTAG', value: "${dockerTag}")]
+  }
 }
